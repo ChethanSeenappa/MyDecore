@@ -1,4 +1,4 @@
-package com.example.chethanseenappa.mydecor;
+package com.decor.item;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,15 +7,14 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 
-import com.example.chethanseenappa.mydecor.dummy.DecoreContent;
+import com.example.chethanseenappa.mydecor.R;
+import com.decor.item.model.DecorMainCategory;
 
 import java.util.List;
 
@@ -27,7 +26,7 @@ import java.util.List;
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
-public class DecorListActivity extends AppCompatActivity {
+public class DecorMainActivity extends AppCompatActivity {
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -38,25 +37,13 @@ public class DecorListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_decor_list);
-
+        setContentView(R.layout.main_decor_category_list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
-        View recyclerView = findViewById(R.id.decor_list);
+        View recyclerView = findViewById(R.id.decor_category_list);
         assert recyclerView != null;
         setupRecyclerView((RecyclerView) recyclerView);
-
         if (findViewById(R.id.decor_detail_container) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-w900dp).
@@ -67,29 +54,28 @@ public class DecorListActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(DecoreContent.ITEMS));
+        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(DecorMainCategory.ITEMS));
     }
 
     public class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
-        private final List<DecoreContent.DummyItem> mValues;
+        private final List<DecorMainCategory.DecorItem> mValues;
 
-        public SimpleItemRecyclerViewAdapter(List<DecoreContent.DummyItem> items) {
+        public SimpleItemRecyclerViewAdapter(List<DecorMainCategory.DecorItem> items) {
             mValues = items;
         }
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.decor_list_content, parent, false);
+                    .inflate(R.layout.decor_category_list_content, parent, false);
             return new ViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
             holder.mItem = mValues.get(position);
-//            holder.mIdView.setText(mValues.get(position).id);
             holder.mContentView.setText(mValues.get(position).content);
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -105,9 +91,8 @@ public class DecorListActivity extends AppCompatActivity {
                                 .commit();
                     } else {
                         Context context = v.getContext();
-                        Intent intent = new Intent(context, DecorDetailActivity.class);
-                        intent.putExtra(DecorDetailFragment.ARG_ITEM_ID, holder.mItem.id);
-
+                        Intent intent = new Intent(context, DecorListActivity.class);
+                        intent.putExtra("Name", "Chethan");
                         context.startActivity(intent);
                     }
                 }
@@ -121,14 +106,12 @@ public class DecorListActivity extends AppCompatActivity {
 
         public class ViewHolder extends RecyclerView.ViewHolder {
             public final View mView;
-//            public final TextView mIdView;
             public final TextView mContentView;
-            public DecoreContent.DummyItem mItem;
+            public DecorMainCategory.DecorItem mItem;
 
             public ViewHolder(View view) {
                 super(view);
                 mView = view;
-//                mIdView = (TextView) view.findViewById(R.id.id);
                 mContentView = (TextView) view.findViewById(R.id.content);
             }
 

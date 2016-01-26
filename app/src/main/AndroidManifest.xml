@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".DecorListActivity"
+            android:name="com.decor.item.DecorMainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -19,13 +19,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DecorDetailActivity"
+            android:name="com.decor.item.DecorListActivity"
+            android:label="@string/title_list_page"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name="com.decor.item.DecorDetailActivity"
             android:label="@string/title_decor_detail"
-            android:parentActivityName=".DecorListActivity"
+            android:parentActivityName="com.decor.item.DecorMainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.chethanseenappa.mydecor.DecorListActivity" />
+                android:value="com.decor.item.DecorMainActivity" />
         </activity>
     </application>
 

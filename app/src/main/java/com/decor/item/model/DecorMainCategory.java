@@ -1,4 +1,4 @@
-package com.example.chethanseenappa.mydecor.dummy;
+package com.decor.item.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,33 +11,33 @@ import java.util.Map;
  * <p>
  * TODO: Replace all uses of this class before publishing your app.
  */
-public class DecoreContent {
-    public static final List<DummyItem> ITEMS = new ArrayList<DummyItem>();
-    public static final Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
+public class DecorMainCategory {
+    public static final List<DecorItem> ITEMS = new ArrayList<DecorItem>();
+    public static final Map<String, DecorItem> ITEM_MAP = new HashMap<String, DecorItem>();
     private static final ArrayList<String> itemCategory = new ArrayList<String>();
 //  Replace static content with Dynamic content's of Decore
     private static final int COUNT = 3;
     static {
         addItemCategory();
         for (int i = 1; i <= COUNT; i++) {
-            addItem(createDummyItem(i));
+            addItem(createDecorItem(i));
         }
     }
 
     private static void addItemCategory() {
         itemCategory.add("Painting");
-        itemCategory.add("Home Decore");
-        itemCategory.add("Others");
+        itemCategory.add("Home Decor");
+        itemCategory.add("Sculpture");
     }
 
     //  Make content adder dynamic
-    private static void addItem(DummyItem item) {
+    private static void addItem(DecorItem item) {
         ITEMS.add(item);
         ITEM_MAP.put(item.id, item);
     }
 
-    private static DummyItem createDummyItem(int position) {
-        return new DummyItem(String.valueOf(position), itemCategory.get(position-1), makeDetails(position));
+    private static DecorItem createDecorItem(int position) {
+        return new DecorItem(String.valueOf(position), itemCategory.get(position-1), makeDetails(position));
     }
 
     private static String makeDetails(int position) {
@@ -52,12 +52,12 @@ public class DecoreContent {
     /**
      * A dummy item representing a piece of content.
      */
-    public static class DummyItem {
+    public static class DecorItem {
         public final String id;
         public final String content;
         public final String details;
 
-        public DummyItem(String id, String content, String details) {
+        public DecorItem(String id, String content, String details) {
             this.id = id;
             this.content = content;
             this.details = details;
