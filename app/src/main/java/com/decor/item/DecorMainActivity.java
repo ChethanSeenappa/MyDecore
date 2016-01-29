@@ -54,15 +54,15 @@ public class DecorMainActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(DecorMainCategory.ITEMS));
+        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(new DecorMainCategory().getItemCategory()));
     }
 
     public class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
-        private final List<DecorMainCategory.DecorItem> mValues;
+        private final List<String> mValues;
 
-        public SimpleItemRecyclerViewAdapter(List<DecorMainCategory.DecorItem> items) {
+        public SimpleItemRecyclerViewAdapter(List<String> items) {
             mValues = items;
         }
 
@@ -76,14 +76,14 @@ public class DecorMainActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
             holder.mItem = mValues.get(position);
-            holder.mContentView.setText(mValues.get(position).content);
+            holder.mContentView.setText(mValues.get(position));
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (mTwoPane) {
                         Bundle arguments = new Bundle();
-                        arguments.putString(DecorDetailFragment.ARG_ITEM_ID, holder.mItem.id);
+                        arguments.putString(DecorDetailFragment.ARG_ITEM_ID, holder.mItem);
                         DecorDetailFragment fragment = new DecorDetailFragment();
                         fragment.setArguments(arguments);
                         getSupportFragmentManager().beginTransaction()
@@ -107,7 +107,7 @@ public class DecorMainActivity extends AppCompatActivity {
         public class ViewHolder extends RecyclerView.ViewHolder {
             public final View mView;
             public final TextView mContentView;
-            public DecorMainCategory.DecorItem mItem;
+            public String mItem;
 
             public ViewHolder(View view) {
                 super(view);

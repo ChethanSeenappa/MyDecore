@@ -64,6 +64,7 @@ public class DecorListActivity extends AppCompatActivity {
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            System.out.println("On creatation of list element.");
             View view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.individual_item_card_view, parent, false);
             return new ViewHolder(view);
@@ -71,9 +72,7 @@ public class DecorListActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
-            System.out.println("list activity on bind view with position:   "+position);
-            System.out.println("----------------holder-----------------"+holder.toString());
-            System.out.println("----------------holder.mContentView-----------------"+holder.mContentView);
+            System.out.println("Binding list element from view to its details.");
             holder.mItem = mValues.get(position);
             holder.mContentView.setText(mValues.get(position).toString());
             holder.mView.setOnClickListener(new View.OnClickListener() {

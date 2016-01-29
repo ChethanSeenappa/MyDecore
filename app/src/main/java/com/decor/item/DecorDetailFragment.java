@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.decor.item.model.DecorItem;
 import com.example.chethanseenappa.mydecor.R;
 import com.decor.item.model.DecorMainCategory;
 
@@ -20,7 +21,7 @@ import com.decor.item.model.DecorMainCategory;
  */
 public class DecorDetailFragment extends Fragment {
     public static final String ARG_ITEM_ID = "item_id";
-    private DecorMainCategory.DecorItem mItem;
+    private DecorItem.Item mItem;
 
     public DecorDetailFragment() {
     }
@@ -29,11 +30,12 @@ public class DecorDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments().containsKey(ARG_ITEM_ID)) {
-            mItem = DecorMainCategory.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
+//            mItem = DecorItem.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
-                appBarLayout.setTitle(mItem.content);
+//                appBarLayout.setTitle(mItem.content);
+                appBarLayout.setTitle("Some random value");
             }
         }
     }
@@ -42,7 +44,8 @@ public class DecorDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.decor_detail, container, false);
         if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.decor_detail)).setText(mItem.details);
+//            ((TextView) rootView.findViewById(R.id.decor_detail)).setText(mItem.details);
+            ((TextView) rootView.findViewById(R.id.decor_detail)).setText("random text");
         }
         return rootView;
     }
